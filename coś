@@ -1,0 +1,97 @@
+<!doctype html >
+<!--
+Copyright 2020 Google Sp
+Licencjonowane na podstawie licencji Apache w wersji 2.0 („Licencja”);
+nie możesz używać tego pliku, chyba że zgodnie z Licencją.
+Kopię Licencji można uzyskać pod adresem:
+      http://www.apache.org/licenses/LICENSE-2.0
+O ile nie jest to wymagane przez obowiązujące prawo lub nie zostało to uzgodnione na piśmie, oprogramowanie
+dystrybuowane w ramach Licencji jest rozpowszechniane na PODSTAWIE „TAK JAK JEST”,
+BEZ JAKICHKOLWIEK GWARANCJI LUB WARUNKÓW, wyraźnych lub dorozumianych.
+Zapoznaj się z Licencją, aby uzyskać informacje o konkretnych uprawnieniach dotyczących języka i
+ograniczenia wynikające z Licencji.
+-->
+
+< html >
+  < głowa >
+    < meta  charset =" utf-8 " >
+    < nazwa meta  =" viewport " content =" szerokość = szerokość urządzenia, początkowa skala = 1 " >
+    < title > Przykład reklamy pełnoekranowej w sieci Web </ title >
+    < script  async  src =" https://securepubads.g.doubleclick.net/tag/js/gpt.js " > </ script >
+    < skrypt >
+      okno . googletag  =  okno . googletag  ||  { cmd : [ ] } ;
+
+      // Boksy reklamowe GPT
+      var  interstitialSlot ,  staticSlot ;
+
+      googletag . cmd . wciśnij ( funkcja ( )  {
+        // Zdefiniuj internetowy boks reklamowy pełnoekranowy.
+        interstitialSlot  =  googletag . zdefiniuj boks poza stroną (
+            '/6355419/Podróż/Europa/Francja/Paryż' ,
+            googletag . wyliczenia . Poza formatem strony . CZĘŚĆ POŚREDNIA ) ;
+
+        // Boks zwraca wartość null, jeśli strona lub urządzenie nie obsługuje reklam pełnoekranowych.
+        jeśli  ( slot pełnoekranowy )  {
+          pełnoekranowy boks . addService ( googletag .pubads ( ) ) ; _
+
+          dokument . getElementById ( 'status' ) . innerText  =  'Trwa reklama pełnoekranowa...' ;
+
+          // Dodaj detektor zdarzeń, aby włączyć nawigację po załadowaniu reklamy pełnoekranowej.
+          // Jeśli to zdarzenie się nie uruchamia, spróbuj wyczyścić pamięć lokalną i odświeżyć
+          // Strona.
+          googletag . pubads ( ) . addEventListener ( 'slotOnload' ,  function ( zdarzenie )  {
+            if  ( interstitialSlot  ===  zdarzenie . slot )  {
+              dokument . getElementById ( 'link' ) . styl . display  =  'blok' ;
+              dokument . getElementById ( 'status' ) . innerText  =  'Załadowano reklamę pełnoekranową.' ;
+            }
+          } ) ;
+        }
+
+        // Zdefiniuj statyczne boksy reklamowe.
+        staticSlot  =  googletag . zdefiniuj gniazdo (
+            '/6355419/Travel/Europe' ,  [ 100 ,  100 ] ,  'static-ad-1' )
+          . addService ( googletag .pubads ( ) ) ; _
+
+        // Włącz SRA i usługi.
+        googletag . pubads ( ) . enableSingleRequest ( ) ;
+        googletag . włączUsługi ( ) ;
+      } ) ;
+    </ skrypt >
+    < styl >
+      # link {
+        wyświetlacz : brak;
+      }
+
+      dz . treść {
+        pozycja : ustalona;
+        góra :  50 % ;
+      }
+    </ styl >
+  </ głowa >
+  < ciało >
+    < div  id =" static-ad-1 " style =" szerokość: 100px; wysokość: 100px; " > </ div >
+    < div  class =" treść " >
+      < span  id =" status " > Reklama pełnoekranowa internetowa nie jest obsługiwana na tej stronie. </ span >
+      < p >
+        < a  id =" link " href =" https://www.example.com/ " > TRIGGER INTERSTITIAL </ a >
+      </ p >
+      < p >
+        <!--
+          Możesz uniemożliwić określonym linkom uruchamianie internetowych reklam pełnoekranowych zarządzanych przez GPT, klikając:
+          dodanie atrybutu data-google-interstitial="false" do elementu kotwicy lub
+          dowolny przodek elementu kotwicy.
+        -->
+        < a  data-google-interstitial =" false " href =" https://www.example.com/ " >
+          Ten link nigdy nie wywoła reklamy pełnoekranowej
+        </ a >
+      </ p >
+    </ div >
+    < skrypt >
+        googletag . cmd . wciśnij ( funkcja ( )  {
+          // Upewnij się, że pierwsze wywołanie reklamy displayowej następuje po statycznym boksie reklamowym
+          // div są zdefiniowane.
+          googletag . wyświetlacz ( staticSlot ) ;
+        } ) ;
+    </ skrypt >
+  </ ciało >
+</ html >
